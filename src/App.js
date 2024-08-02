@@ -100,7 +100,7 @@ function App() {
       <table>
         <thead>
           <tr>
-            <th>Policy ID</th>
+            {/* <th>Policy ID</th> */}
             <th>Partner Code</th>
             <th>Plan Code</th>
             <th>Temp Policy No</th>
@@ -113,7 +113,7 @@ function App() {
         <tbody>
           {results.map((result) => (
             <tr key={result._id}>
-              <td>{result._id}</td>
+              {/* <td>{result._id}</td> */}
               <td>{result.partner_code}</td>
               <td>{result.plan_code}</td>
               <td>{result.temp_policy_no}</td>
