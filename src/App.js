@@ -17,8 +17,9 @@ function App() {
       if (year) params.year = year;
       if (minAmount) params.minAmount = minAmount;
       if (maxAmount) params.maxAmount = maxAmount;
-
-      const response = await axios.get('http://localhost:5000/api/policies', { params });
+      
+      //const response = await axios.get('http://localhost:5000/api/policies', { params });
+      const response = await axios.get('https://backend-thai-life-api.onrender.com/api/policies', { params });
       setResults(response.data);
     } catch (error) {
       console.error('Error fetching data', error);
@@ -34,7 +35,9 @@ function App() {
     formData.append('file', file);
 
     try {
-      await axios.post('http://localhost:5000/api/import', formData, {
+      
+      //await axios.post('http://localhost:5000/api/import', formData, {
+        await axios.post('https://backend-thai-life-api.onrender.com/api/import', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
