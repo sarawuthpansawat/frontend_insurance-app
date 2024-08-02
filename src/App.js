@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css'; // Import the CSS file
 
@@ -8,7 +8,21 @@ function App() {
   const [minAmount, setMinAmount] = useState('');
   const [maxAmount, setMaxAmount] = useState('');
   const [results, setResults] = useState([]);
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    const fetchAllPolicies = async () => {
+      try {
+        //const response = await axios.get('http://localhost:5000/api/policies');
+        const response = await axios.get('https://backend-thai-life-api.onrender.com/api/policies');
+        setResults(response.data);
+      } catch (error) {
+        console.error('Error fetching all policies', error);
+      }
+    };
+
+    fetchAllPolicies();
+  }, []);
 
   const handleSearch = async () => {
     try {
@@ -26,27 +40,26 @@ function App() {
     }
   };
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
+  // const handleFileChange = (e) => {
+  //   setFile(e.target.files[0]);
+  // };
 
-  const handleFileUpload = async () => {
-    const formData = new FormData();
-    formData.append('file', file);
+  // const handleFileUpload = async () => {
+  //   const formData = new FormData();
+  //   formData.append('file', file);
 
-    try {
-      
-      //await axios.post('http://localhost:5000/api/import', formData, {
-        await axios.post('https://backend-thai-life-api.onrender.com/api/import', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      alert('File uploaded successfully');
-    } catch (error) {
-      console.error('Error uploading file', error);
-    }
-  };
+  //   try {
+  //     await axios.post('http://localhost:5000/api/import', formData, {
+  //       //await axios.post('https://backend-thai-life-api.onrender.com/api/import', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data'
+  //       }
+  //     });
+  //     alert('File uploaded successfully');
+  //   } catch (error) {
+  //     console.error('Error uploading file', error);
+  //   }
+  // };
 
   const formatDate = (date) => {
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
